@@ -18,7 +18,10 @@ namespace MVVMDemo
             {
                 handler(this, new PropertyChangedEventArgs(name));
             }
+            UpdateRelayCommands();
         }
+
+        protected virtual void UpdateRelayCommands() { }
 
 
 

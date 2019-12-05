@@ -24,7 +24,6 @@ namespace MVVMDemo
             {
                 _name = value;
                 OnPropertyChanged(nameof(Name));
-                UpdateRelayCommands();
             }
         }
 
@@ -38,7 +37,7 @@ namespace MVVMDemo
             MakeNameEmptyCommand = new RelayCommand(EmptyExecute, EmptyCanExecute);
         }
 
-        private void UpdateRelayCommands()
+        protected override void UpdateRelayCommands()
         {
             if (NewNameCommand != null)
             {
@@ -53,9 +52,9 @@ namespace MVVMDemo
                 MakeNameEmptyCommand.Update();
             }
         }
-        
 
-       
+
+
         private void NewExecute()
         {
             Name = Util.RandomName();
