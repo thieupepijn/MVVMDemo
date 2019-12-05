@@ -11,6 +11,7 @@ namespace MVVMDemo
     public class NameViewModel : ViewModel
     {
         public RelayCommand NewNameCommand { get; set; }
+        public RelayCommand ShowNameCommand { get; set; }
 
         private string _name;    
         public string Name {
@@ -22,7 +23,7 @@ namespace MVVMDemo
             set
             {
                 _name = value;
-                OnPropertyChanged("Name");
+                OnPropertyChanged(nameof(Name));
             }
         }
 
@@ -30,14 +31,21 @@ namespace MVVMDemo
         public NameViewModel()
         {
             Name = string.Empty;
-            Action action = delegate () { Name = Util.RandomName(); };
-            NewNameCommand = new RelayCommand(action);   
-            
-            
+           
+            NewNameCommand = new RelayCommand(NewExecute);
+            ShowNameCommand = new RelayCommand(ShowExecute);
         }
 
        
+        private void NewExecute()
+        {
+            Name = Util.RandomName();
+        }
 
+        private void ShowExecute()
+        {
+            System.Windows.MessageBox.Show(Name);
+        }
        
 
     }

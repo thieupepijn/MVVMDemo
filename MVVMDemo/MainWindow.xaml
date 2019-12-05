@@ -9,5 +9,6 @@
     <StackPanel>
         <Label Content="{Binding Name}" />
         <Button Content="New Name" Command="{Binding NewNameCommand}" />
+        <Button Content="Show Name" Command="{Binding ShowNameCommand}" />
     </StackPanel>
 </Window>
