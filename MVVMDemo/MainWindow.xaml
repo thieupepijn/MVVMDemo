@@ -10,5 +10,6 @@
         <Label Content="{Binding Name}" />
         <Button Content="New Name" Command="{Binding NewNameCommand}" />
         <Button Content="Show Name" Command="{Binding ShowNameCommand}" />
+        <Button Content="Make Name Empty" Command="{Binding MakeNameEmptyCommand}" />
     </StackPanel>
 </Window>

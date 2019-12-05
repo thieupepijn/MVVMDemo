@@ -12,22 +12,19 @@ namespace MVVMDemo
     {
         public RelayCommand NewNameCommand { get; set; }
         public RelayCommand ShowNameCommand { get; set; }
+        public RelayCommand MakeNameEmptyCommand { get; set; }
 
         private string _name;    
         public string Name {
             get
             {
                 return _name;
-            }
-           
+            }        
             set
             {
                 _name = value;
                 OnPropertyChanged(nameof(Name));
-                if (ShowNameCommand != null)
-                {
-                    ShowNameCommand.Update();
-                }
+                UpdateRelayCommands();
             }
         }
 
@@ -38,15 +35,31 @@ namespace MVVMDemo
            
             NewNameCommand = new RelayCommand(NewExecute);
             ShowNameCommand = new RelayCommand(ShowExecute, ShowCanExecute);
+            MakeNameEmptyCommand = new RelayCommand(EmptyExecute, EmptyCanExecute);
         }
+
+        private void UpdateRelayCommands()
+        {
+            if (NewNameCommand != null)
+            {
+                NewNameCommand.Update();
+            }
+            if (ShowNameCommand != null)
+            {
+                ShowNameCommand.Update();
+            }
+            if (MakeNameEmptyCommand != null)
+            {
+                MakeNameEmptyCommand.Update();
+            }
+        }
+        
 
        
         private void NewExecute()
         {
             Name = Util.RandomName();
         }
-
-
 
         private void ShowExecute()
         {
@@ -57,6 +70,17 @@ namespace MVVMDemo
         {
             return !String.IsNullOrEmpty(Name);
         }
+
+        private void EmptyExecute()
+        {
+            Name = string.Empty;
+        }
+
+        private bool EmptyCanExecute()
+        {
+            return !String.IsNullOrEmpty(Name);
+        }
+
        
 
     }
