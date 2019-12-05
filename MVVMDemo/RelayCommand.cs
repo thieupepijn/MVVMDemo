@@ -44,7 +44,10 @@ namespace MVVMDemo
 
         public void Update()
         {
-            CanExecuteChanged(this, new EventArgs());
+            if (CanExecuteChanged != null)
+            {
+                CanExecuteChanged(this, new EventArgs());
+            }
         }
         
 

@@ -10,9 +10,9 @@ namespace MVVMDemo
 {
     public class NameViewModel : ViewModel
     {
-        public RelayCommand NewNameCommand { get; set; }
-        public RelayCommand ShowNameCommand { get; set; }
-        public RelayCommand MakeNameEmptyCommand { get; set; }
+        public RelayCommand NewNameCommand { get; private set; }
+        public RelayCommand ShowNameCommand { get; private set; }
+        public RelayCommand MakeNameEmptyCommand { get; private set; }
 
         private string _name;    
         public string Name {
