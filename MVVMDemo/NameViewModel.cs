@@ -24,6 +24,10 @@ namespace MVVMDemo
             {
                 _name = value;
                 OnPropertyChanged(nameof(Name));
+                if (ShowNameCommand != null)
+                {
+                    ShowNameCommand.Update();
+                }
             }
         }
 
@@ -33,7 +37,7 @@ namespace MVVMDemo
             Name = string.Empty;
            
             NewNameCommand = new RelayCommand(NewExecute);
-            ShowNameCommand = new RelayCommand(ShowExecute);
+            ShowNameCommand = new RelayCommand(ShowExecute, ShowCanExecute);
         }
 
        
@@ -42,9 +46,16 @@ namespace MVVMDemo
             Name = Util.RandomName();
         }
 
+
+
         private void ShowExecute()
         {
             System.Windows.MessageBox.Show(Name);
+        }
+
+        private bool ShowCanExecute()
+        {
+            return !String.IsNullOrEmpty(Name);
         }
        
 

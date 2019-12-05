@@ -9,25 +9,43 @@ namespace MVVMDemo
 {
     public class RelayCommand : ICommand
     {
-        Action _action;
+        Action _execute;
+        Func<bool> _canExecute;
 
-        public RelayCommand(Action action)
+        public RelayCommand(Action execute)
         {
-            _action = action;
+            _execute = execute;
+        }
+
+        public RelayCommand(Action execute, Func<bool> canexecute)
+        {
+            _execute = execute;
+            _canExecute = canexecute;
         }
 
         public event EventHandler CanExecuteChanged;
 
         public bool CanExecute(object parameter)
         {
-            return true;
+            if (_canExecute == null)
+            {
+                return true;
+            }
+            else
+            {
+                return _canExecute.Invoke();
+            }
         }
 
         public void Execute(object parameter)
         {
-            _action.Invoke();
+            _execute.Invoke();
         }
 
+        public void Update()
+        {
+            CanExecuteChanged(this, new EventArgs());
+        }
         
 
     }
